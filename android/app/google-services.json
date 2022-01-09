@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "119971356786",
+    "project_id": "choice-drop",
+    "storage_bucket": "choice-drop.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:119971356786:android:22fb62337e150069b9a2eb",
+        "android_client_info": {
+          "package_name": "com.choicedrop.hsi"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "119971356786-mqf9pr5i13n5o91mfglb73828jo824gl.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBZM2d9ipY18IWBVFeSla70NZfQJFoEpUo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "119971356786-mqf9pr5i13n5o91mfglb73828jo824gl.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
