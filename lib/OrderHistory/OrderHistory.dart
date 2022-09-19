@@ -5,6 +5,8 @@ import 'package:choicedrop/Checkout/CartDetails.dart';
 import 'package:choicedrop/Checkout/CartProvider.dart';
 import 'package:choicedrop/Static/static.dart';
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class OrderHistory extends StatefulWidget {
   final recentOrders;
@@ -132,6 +134,20 @@ class _OrderHistory extends State<OrderHistory>
     }
   }
 
+  void signOut() {
+    // logOut();
+    removeValues();
+    Navigator.of(context).pushReplacementNamed("/landingscreen");
+  }
+
+  removeValues() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    prefs.remove('token');
+    prefs.remove('vaildToken');
+    var token = prefs.getString('token');
+    print('Emptied Token $token');
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -141,6 +157,17 @@ class _OrderHistory extends State<OrderHistory>
           elevation: 8,
           // backgroundColor: Colors.blue,
           // title: buddiesLogo,
+          actions: <Widget>[
+            IconButton(
+              icon: Icon(
+                FontAwesomeIcons.signOutAlt,
+                color: Colors.white,
+              ),
+              onPressed: () {
+                signOut();
+              },
+            )
+          ],
         ),
         body: SizedBox(
             height: MediaQuery.of(context).size.height,

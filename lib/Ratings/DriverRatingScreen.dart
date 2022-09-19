@@ -2,6 +2,7 @@ import 'package:choicedrop/Static/ensure_visible.dart';
 import 'package:choicedrop/Static/static.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_rating/flutter_rating.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
@@ -254,7 +255,7 @@ class _DriverReviewPage extends State<DriverReviewPage> {
           controller: _customTipController,
           keyboardType: TextInputType.number,
           maxLength: 4,
-          maxLengthEnforced: true,
+          maxLengthEnforcement: MaxLengthEnforcement.enforced,
           obscureText: false,
           decoration: InputDecoration(
               icon: Icon(

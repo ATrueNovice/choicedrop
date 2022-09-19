@@ -75,7 +75,7 @@ class _AccountInfo extends State<AccountInfo> with TickerProviderStateMixin {
     1: null,
   };
 
-  Map<String, dynamic> _detailUpdateMap = {'phone': customerProfile.phone};
+  Map<String, dynamic> _detailUpdateMap = {'phone': ''};
 
   List _usage = [
     'Headache',
@@ -373,8 +373,8 @@ class _AccountInfo extends State<AccountInfo> with TickerProviderStateMixin {
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: <Widget>[
-                  OutlineButton.icon(
-                    shape: StadiumBorder(),
+                  OutlinedButton.icon(
+                    // shape: StadiumBorder(),
                     icon: Icon(
                       Icons.camera,
                       color: Colors.blue,
@@ -391,8 +391,8 @@ class _AccountInfo extends State<AccountInfo> with TickerProviderStateMixin {
                   SizedBox(
                     width: 20,
                   ),
-                  OutlineButton.icon(
-                    shape: StadiumBorder(),
+                  OutlinedButton.icon(
+                    // shape: StadiumBorder(),
                     icon: Icon(
                       Icons.photo_size_select_actual,
                       color: Colors.blue,
@@ -575,18 +575,18 @@ class _AccountInfo extends State<AccountInfo> with TickerProviderStateMixin {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: <Widget>[
-                  Text(
-                    'Phone',
-                    style: TextStyle(fontFamily: 'Poppins', fontSize: 14),
-                  ),
-                  Text(
-                    _userDetails.phone != null ? '${_userDetails.phone}' : '',
-                    style: TextStyle(
-                        fontFamily: 'Roboto-Regular',
-                        color: Colors.black,
-                        fontWeight: FontWeight.bold,
-                        fontSize: 14),
-                  ),
+                  // Text(
+                  //   'Phone',
+                  //   style: TextStyle(fontFamily: 'Poppins', fontSize: 14),
+                  // ),
+                  // Text(
+                  //   _userDetails.phone != null ? '${_userDetails.phone}' : '',
+                  //   style: TextStyle(
+                  //       fontFamily: 'Roboto-Regular',
+                  //       color: Colors.black,
+                  //       fontWeight: FontWeight.bold,
+                  //       fontSize: 14),
+                  // ),
                 ],
               ),
             ),

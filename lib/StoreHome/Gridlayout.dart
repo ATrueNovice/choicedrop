@@ -87,7 +87,7 @@ class CategoryAndProducts extends StatelessWidget {
                     },
                     child: _buildProductList(
                         productMenu[i].productName,
-                        productMenu[i].image,
+                        productMenu[i].productImage,
                         productMenu[i].usage,
                         productMenu[i].type,
                         productMenu[i].minimumQuantity,

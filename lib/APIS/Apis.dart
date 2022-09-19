@@ -122,6 +122,32 @@ class APIS {
     }).then((value) {
       return value;
     });
-    ;
+  }
+
+  static Future addProducts(List<Products> products) async {
+    final refUsers = FirebaseFirestore.instance.collection('products');
+    final allProducts = await refUsers.get();
+
+    var data = allProducts.docs;
+
+    print('Check ID');
+
+    adduser(user) async {
+      final userDoc = refUsers.doc();
+      final newUser = user.copyWith(idUser: userDoc.id);
+
+      return await userDoc
+          .set(newUser.toJson())
+          .catchError((e) {})
+          .then((value) {
+        return value;
+      });
+    }
+
+    for (int i = 1; i < products.length; i++) {
+      adduser(products[i]);
+
+      // }
+    }
   }
 }

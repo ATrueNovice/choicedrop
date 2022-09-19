@@ -3,16 +3,14 @@ import 'package:choicedrop/APIS/Apis.dart';
 import 'package:choicedrop/BottomBar/bottombar.dart';
 import 'package:choicedrop/Checkout/CartDetails.dart';
 import 'package:choicedrop/Checkout/CartProvider.dart';
-import 'package:choicedrop/Checkout/Squarehelper/Config.dart';
 import 'package:choicedrop/Static/InheritedWidgets.dart';
 import 'package:choicedrop/Static/static.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_mapbox_autocomplete/flutter_mapbox_autocomplete.dart';
 import 'package:intl/intl.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:square_in_app_payments/in_app_payments.dart';
-import 'package:square_in_app_payments/models.dart';
 
 class Checkout extends StatefulWidget {
   @override
@@ -141,30 +139,30 @@ class _CheckoutState extends State<Checkout> {
 
   //Address
 
-  void _squarePay() {
-    InAppPayments.setSquareApplicationId(squareApplicationId);
-    InAppPayments.startCardEntryFlow(
-      onCardNonceRequestSuccess: _cardNonceRequestSuccess,
-      onCardEntryCancel: _cardEntryCancel,
-    );
-  }
+  // void _squarePay() {
+  //   InAppPayments.setSquareApplicationId(squareApplicationId);
+  //   InAppPayments.startCardEntryFlow(
+  //     onCardNonceRequestSuccess: _cardNonceRequestSuccess,
+  //     onCardEntryCancel: _cardEntryCancel,
+  //   );
+  // }
 
-  void _cardEntryCancel() {}
+  // void _cardEntryCancel() {}
 
-  void _cardNonceRequestSuccess(CardDetails result) {
-    print('Testing nonce');
+  // void _cardNonceRequestSuccess(CardDetails result) {
+  //   print('Testing nonce');
 
-    InAppPayments.completeCardEntry(
-      onCardEntryComplete: _cardEntryComplete,
-    );
+  //   InAppPayments.completeCardEntry(
+  //     onCardEntryComplete: _cardEntryComplete,
+  //   );
 
-    setState(() {
-      nonce = result.nonce;
-    });
+  //   setState(() {
+  //     nonce = result.nonce;
+  //   });
 
-    //Add Nonce Pop Up
-    print(result.nonce);
-  }
+  //   //Add Nonce Pop Up
+  //   print(result.nonce);
+  // }
 
   void _uploadCardData(
       address, address2, city, state, zip, fname, lname, noonce) {
@@ -358,41 +356,43 @@ class _CheckoutState extends State<Checkout> {
                               elevation: 8,
                               color: nonce == '' ? Colors.white : Colors.teal,
                               onPressed: () {
-                                nonce == ''
-                                    ? _squarePay()
-                                    : checkOrder(
-                                        tempCart.orders.toList(),
-                                        _address == ""
-                                            ? customerProfile.address
-                                            : _address,
-                                        _options[sharedValue],
-                                        _couponCode,
-                                        nonce,
-                                        !usedCoupon || _updatedTotal == null
-                                            ? _totalNumber
-                                            : _updatedTotal,
-                                        _paymentType);
+                                checkOrder(
+                                    tempCart.orders.toList(),
+                                    _address == ""
+                                        ? customerProfile.address
+                                        : _address,
+                                    _options[sharedValue],
+                                    _couponCode,
+                                    nonce,
+                                    !usedCoupon || _updatedTotal == null
+                                        ? _totalNumber
+                                        : _updatedTotal,
+                                    _paymentType);
                               },
                               child: SizedBox(
                                 height: screenAwareSize(30, context),
                                 child: Padding(
                                   padding: const EdgeInsets.all(6.0),
-                                  child: nonce == ''
-                                      ? Text(
-                                          'SQUARE PAY',
-                                          textAlign: TextAlign.center,
-                                          style: TextStyle(
-                                              fontFamily: 'Poppins',
-                                              fontSize: 14,
-                                              color: Colors.blue),
-                                        )
-                                      : Text(
-                                          'Submit Order',
-                                          style: TextStyle(
-                                              fontFamily: 'Poppins',
-                                              fontSize: 14,
-                                              color: Colors.white),
-                                        ),
+                                  child:
+
+                                      // nonce == ''
+                                      //     ? Text(
+                                      //         'SQUARE PAY',
+                                      //         textAlign: TextAlign.center,
+                                      //         style: TextStyle(
+                                      //             fontFamily: 'Poppins',
+                                      //             fontSize: 14,
+                                      //             color: Colors.blue),
+                                      //       )
+                                      //     :
+
+                                      Text(
+                                    'Submit Order',
+                                    style: TextStyle(
+                                        fontFamily: 'Poppins',
+                                        fontSize: 14,
+                                        color: Colors.white),
+                                  ),
                                 ),
                               ),
                             ),
@@ -600,7 +600,7 @@ class _CheckoutState extends State<Checkout> {
             controller: _couponController,
             keyboardType: TextInputType.text,
             maxLength: 20,
-            maxLengthEnforced: true,
+            maxLengthEnforcement: MaxLengthEnforcement.enforced,
             obscureText: false,
             textCapitalization: TextCapitalization.none,
             decoration: InputDecoration(

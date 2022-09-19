@@ -599,7 +599,7 @@ class _ProductScreenBottomPartState extends State<ProductScreenBottomPart> {
                         ),
                         Text(
                           '\$' +
-                              ('${(product.prices[currentSizeIndex] * cartVal).toStringAsFixed(2)}'),
+                              ('${(product.prices[currentSizeIndex] * cartVal)}'),
                           style: TextStyle(
                               color: Colors.white, fontFamily: 'Poppins'),
                         ),

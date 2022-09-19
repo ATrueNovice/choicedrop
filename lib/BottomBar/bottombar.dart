@@ -1,5 +1,6 @@
 import 'package:bubble_bottom_bar/bubble_bottom_bar.dart';
 import 'package:choicedrop/APIS/Apis.dart';
+import 'package:choicedrop/APIS/addProducts.dart';
 import 'package:choicedrop/Account/AccountInfo.dart';
 import 'package:choicedrop/Checkout/Cart.dart';
 import 'package:choicedrop/HomeScreens/HomeScreen.dart';
@@ -23,8 +24,8 @@ class _BottomBarController extends State<BottomBarController> {
   var pages = [
     HomeScreen(),
     CartPage(),
-    OrderHistory(),
-    AccountInfo(),
+    const OrderHistory(),
+    // AccountInfo(),
   ];
 
   void _onTabTapped(int index) {
@@ -35,7 +36,7 @@ class _BottomBarController extends State<BottomBarController> {
 
   void _fbstart() async {
     print('checking driver');
-    await APIS.checkCustomer();
+    // await APIS.addProducts(AddProducts.initProducts);
   }
 
   @override
@@ -112,24 +113,24 @@ class _BottomBarController extends State<BottomBarController> {
               ),
             ),
           ),
-          BubbleBottomBarItem(
-            backgroundColor: Colors.white,
-            icon: Icon(
-              FontAwesomeIcons.userCircle,
-              color: Colors.blue,
-            ),
-            activeIcon: Icon(
-              FontAwesomeIcons.userCircle,
-              color: Colors.grey,
-            ),
-            title: Text(
-              "Account",
-              style: TextStyle(
-                fontFamily: 'Poppins',
-                color: Colors.grey,
-              ),
-            ),
-          ),
+          // BubbleBottomBarItem(
+          //   backgroundColor: Colors.white,
+          //   icon: Icon(
+          //     FontAwesomeIcons.userCircle,
+          //     color: Colors.blue,
+          //   ),
+          //   activeIcon: Icon(
+          //     FontAwesomeIcons.userCircle,
+          //     color: Colors.grey,
+          //   ),
+          //   title: Text(
+          //     "Account",
+          //     style: TextStyle(
+          //       fontFamily: 'Poppins',
+          //       color: Colors.grey,
+          //     ),
+          //   ),
+          // ),
         ],
       ),
       body: pages[_currentIndex],

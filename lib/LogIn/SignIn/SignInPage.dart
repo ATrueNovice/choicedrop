@@ -52,10 +52,7 @@ class _SignIn extends State<SignIn> {
   String passwordValidator =
       r'^(?=.*\d)(?=.*[A-Z])(?=.*[a-z])(?=.*[^\w\d\s:])([^\s]){8,16}$';
 
-  final Map<String, dynamic> _signInForm = {
-    'username': null,
-    'password': null,
-  };
+  final Map<String, dynamic> _signInForm = {'username': null, 'password': null};
 
   // Token emailToken;
 
@@ -203,14 +200,14 @@ class _SignIn extends State<SignIn> {
 
   Future _submit() async {
     final form = _signInFormKey.currentState;
+    _emailLogin(_signInForm);
 
-    if (form.validate()) {
-      form.save();
-      _emailLogin(_signInForm);
-    } else {
-      print('Cant save form');
-      print(_signInForm.values);
-    }
+    // if (form.validate()) {
+    //   form.save();
+    // } else {
+    //   print('Cant save form');
+    //   print(_signInForm.values);
+    // }
   }
 
   preformLogin() {
@@ -535,7 +532,7 @@ class _SignIn extends State<SignIn> {
           controller: _pwdController,
           keyboardType: TextInputType.text,
           maxLength: 25,
-          maxLengthEnforced: true,
+          maxLengthEnforcement: MaxLengthEnforcement.enforced,
           obscureText: true,
           textCapitalization: TextCapitalization.none,
           style: TextStyle(

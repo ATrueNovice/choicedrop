@@ -1,4 +1,5 @@
 import 'package:choicedrop/APIS/Apis.dart';
+import 'package:choicedrop/Checkout/CartProvider.dart';
 import 'package:choicedrop/SelectedProductPage/SelectedProduct.dart';
 import 'package:choicedrop/Static/static.dart';
 import 'package:choicedrop/StoreHome/Store.dart';
@@ -52,7 +53,7 @@ class _HomeScreen extends State<HomeScreen> with TickerProviderStateMixin {
                     return Text('Error: ${snapshot.error}');
                   } else {
                     products = snapshot.data;
-
+                    pOrders = snapshot.data;
                     return _buildSelectionOptions(snapshot.data, themeData);
                   }
               }
@@ -141,7 +142,9 @@ class _HomeScreen extends State<HomeScreen> with TickerProviderStateMixin {
                 children: <Widget>[
                   Expanded(
                     child: TextField(
-                      onChanged: (value) {},
+                      onTap: () {
+                        showSearch(context: context, delegate: DataSearch());
+                      },
                       decoration: InputDecoration(
                         hintText: "Search",
                         hintStyle: TextStyle(
@@ -297,42 +300,46 @@ class _HomeScreen extends State<HomeScreen> with TickerProviderStateMixin {
   }
 
   _buildCoupon() {
-    return Container(
-      child: RaisedButton(
-        color: Colors.orange[300],
-        elevation: 8,
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(18)),
-        onPressed: () {
-          _showDialog();
-        },
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-          children: <Widget>[
-            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: CircleAvatar(
-                backgroundColor: Colors.white,
-                child: Icon(FontAwesomeIcons.tag, color: Colors.black),
-                radius: screenAwareSize(30, context),
+    return Padding(
+      padding: const EdgeInsets.all(20.0),
+      child: Container(
+        child: RaisedButton(
+          color: Colors.orange[300],
+          elevation: 8,
+          shape:
+              RoundedRectangleBorder(borderRadius: BorderRadius.circular(18)),
+          onPressed: () {
+            _showDialog();
+          },
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: <Widget>[
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: CircleAvatar(
+                  backgroundColor: Colors.white,
+                  child: Icon(FontAwesomeIcons.tag, color: Colors.black),
+                  radius: screenAwareSize(30, context),
+                ),
               ),
-            ),
-            Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: <Widget>[
-                Text('Hey Bud, Here Is A Discount',
+              Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: <Widget>[
+                  Text('Hey Bud, Here Is A Discount',
+                      style: TextStyle(
+                        fontFamily: 'Poppins',
+                        color: Colors.white,
+                      )),
+                  Text(
+                    'Take 10% Off Your Next Order',
                     style: TextStyle(
-                      fontFamily: 'Poppins',
-                      color: Colors.white,
-                    )),
-                Text(
-                  'Take 10% Off Your Next Order',
-                  style: TextStyle(
-                      fontFamily: 'Roboto-Regular', color: Colors.white),
-                )
-              ],
-            ),
-            Icon(FontAwesomeIcons.angleRight, color: Colors.white)
-          ],
+                        fontFamily: 'Roboto-Regular', color: Colors.white),
+                  )
+                ],
+              ),
+              Icon(FontAwesomeIcons.angleRight, color: Colors.white)
+            ],
+          ),
         ),
       ),
     );
@@ -450,6 +457,8 @@ class _HomeScreen extends State<HomeScreen> with TickerProviderStateMixin {
   }
 
   Widget _buildDeals(products, theme) {
+    var bestProducts =
+        products.where((e) => e.category == 'Water Coolers').toList();
     return Column(crossAxisAlignment: CrossAxisAlignment.start, children: <
         Widget>[
       Padding(
@@ -493,11 +502,11 @@ class _HomeScreen extends State<HomeScreen> with TickerProviderStateMixin {
           height: MediaQuery.of(context).size.height / 3,
           width: MediaQuery.of(context).size.width,
           child: ListView.builder(
-            itemCount: products.length,
+            itemCount: bestProducts.length,
             shrinkWrap: true,
             scrollDirection: Axis.horizontal,
             itemBuilder: (context, i) {
-              final product = products[i];
+              final product = bestProducts[i];
 
               return InkWell(
                 onTap: () {
@@ -558,5 +567,68 @@ class _HomeScreen extends State<HomeScreen> with TickerProviderStateMixin {
             },
           ))
     ]);
+  }
+}
+
+class DataSearch extends SearchDelegate<String> {
+  DataSearch();
+  @override
+  List<Widget> buildActions(BuildContext context) {
+    return [
+      IconButton(
+          icon: Icon(FontAwesomeIcons.backspace),
+          onPressed: () {
+            query = "";
+          })
+    ];
+    //Navigate with data
+  }
+
+  @override
+  Widget buildLeading(BuildContext context) {
+    //Build icon
+    return IconButton(
+        icon: AnimatedIcon(
+            icon: AnimatedIcons.menu_arrow, progress: transitionAnimation),
+        onPressed: () {
+          close(context, null);
+        });
+  }
+
+  Widget buildResults(BuildContext context) {
+    // return
+  }
+
+  @override
+  Widget buildSuggestions(BuildContext context) {
+    final suggestionList = query.isEmpty
+        ? pOrders
+        : pOrders
+            .where((p) =>
+                p.productName.toLowerCase().startsWith(query) ? true : false)
+            .toList();
+
+    return ListView.builder(
+      itemBuilder: (context, i) => ListTile(
+          // leading: Icon(FontAwesomeIcons.water),
+          title: GestureDetector(
+        onTap: () {
+          final prod = suggestionList[i];
+          _navigtorFunc(prod, context);
+        },
+        child: Text(suggestionList[i].productName,
+            style: TextStyle(
+              color: Colors.grey,
+            )),
+      )),
+      itemCount: suggestionList.length,
+    );
+  }
+
+  void _navigtorFunc(products, context) {
+    Navigator.push(
+        context,
+        MaterialPageRoute(
+            builder: (context) => SelectedProduct(product: products)));
   }
 }

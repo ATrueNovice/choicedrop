@@ -10,9 +10,9 @@ import 'dart:math' as math;
 
 enum FilterTabs {
   All,
-  Categories,
-  Type,
-  Usage,
+//   Categories,
+//   Type,
+//   Usage,
 }
 
 typedef void FilterTabCallback(FilterTabs tab);
@@ -50,7 +50,7 @@ class _StoreHome extends State<StoreHome>
   int starCount = 5;
   double rating = 4.5;
 
-  dynamic products;
+  List<Products> products;
   dynamic id;
 
 //Products
@@ -113,9 +113,9 @@ class _StoreHome extends State<StoreHome>
 
   List _tabDetails = [
     '',
-    'Category',
-    'Type',
-    'Usage',
+    // 'Category',
+    // 'Type',
+    // 'Usage',
   ];
 
   //Dropdown
@@ -321,70 +321,70 @@ class _StoreHome extends State<StoreHome>
             .toList();
         break;
 
-      case FilterTabs.Type:
-        // usage might be wrong, I'm not sure
-        final Map<String, List<Products>> allTypes =
-            Map.fromEntries(TabCategories.type.map((e) => MapEntry(e, [])));
+      // case FilterTabs.Type:
+      //   // usage might be wrong, I'm not sure
+      //   final Map<String, List<Products>> allTypes =
+      //       Map.fromEntries(TabCategories.type.map((e) => MapEntry(e, [])));
 
-        Map<String, List<Products>> headingItems =
-            items.fold(allTypes, (type, element) {
-          if (!type.containsKey(element.type)) {
-            return type;
-          }
+      //   Map<String, List<Products>> headingItems =
+      //       items.fold(allTypes, (type, element) {
+      //     if (!type.containsKey(element.type)) {
+      //       return type;
+      //     }
 
-          return type..update(element.type, (value) => value..add(element));
-        });
+      //     return type..update(element.type, (value) => value..add(element));
+      //   });
 
-        print("Relief headingItems: $headingItems");
-        return headingItems.entries
-            .map((e) => ProductsInHeading(e.key, e.value..sort()))
-            .toList()
-          ..sort();
-        break;
-      case FilterTabs.Categories:
-        // usage might be wrong, I'm not sure
-        final Map<String, List<Products>> allCategories =
-            Map.fromEntries(TabCategories.category.map((e) => MapEntry(e, [])));
+      //   print("Relief headingItems: $headingItems");
+      //   return headingItems.entries
+      //       .map((e) => ProductsInHeading(e.key, e.value..sort()))
+      //       .toList()
+      //     ..sort();
+      //   break;
+      // case FilterTabs.Categories:
+      //   // usage might be wrong, I'm not sure
+      //   final Map<String, List<Products>> allCategories =
+      //       Map.fromEntries(TabCategories.category.map((e) => MapEntry(e, [])));
 
-        Map<String, List<Products>> headingItems =
-            items.fold(allCategories, (categories, element) {
-          if (!categories.containsKey(element.category)) {
-            return categories;
-          }
+      //   Map<String, List<Products>> headingItems =
+      //       items.fold(allCategories, (categories, element) {
+      //     if (!categories.containsKey(element.category)) {
+      //       return categories;
+      //     }
 
-          return categories
-            ..update(element.category, (value) => value..add(element));
-        });
+      //     return categories
+      //       ..update(element.category, (value) => value..add(element));
+      //   });
 
-        print("Category headingItems: $headingItems");
+      //   print("Category headingItems: $headingItems");
 
-        return headingItems.entries
-            .map((e) => ProductsInHeading(e.key, e.value..sort()))
-            .toList()
-          ..sort()
-          ..where((e) => e.products.length != 0);
-        break;
+      //   return headingItems.entries
+      //       .map((e) => ProductsInHeading(e.key, e.value..sort()))
+      //       .toList()
+      //     ..sort()
+      //     ..where((e) => e.products.length != 0);
+      //   break;
 
-      case FilterTabs.Usage:
-        final Map<String, List<Products>> allUsage =
-            Map.fromEntries(TabCategories.usage.map((e) => MapEntry(e, [])));
+      // case FilterTabs.Usage:
+      //   final Map<String, List<Products>> allUsage =
+      //       Map.fromEntries(TabCategories.usage.map((e) => MapEntry(e, [])));
 
-        Map<String, List<Products>> headingItems =
-            items.fold(allUsage, (usage, element) {
-          if (!usage.containsKey(element.usage)) {
-            return usage;
-          }
+      //   Map<String, List<Products>> headingItems =
+      //       items.fold(allUsage, (usage, element) {
+      //     if (!usage.containsKey(element.usage)) {
+      //       return usage;
+      //     }
 
-          return usage..update(element.usage, (value) => value..add(element));
-        });
-        print("headingItems: $headingItems");
+      //     return usage..update(element.usage, (value) => value..add(element));
+      //   });
+      //   print("headingItems: $headingItems");
 
-        return headingItems.entries
-            .map((e) => ProductsInHeading(e.key, e.value..sort()))
-            .toList()
-          ..sort()
-          ..where((e) => e.products.length != 0);
-        break;
+      //   return headingItems.entries
+      //       .map((e) => ProductsInHeading(e.key, e.value..sort()))
+      //       .toList()
+      //     ..sort()
+      //     ..where((e) => e.products.length != 0);
+      //   break;
     }
     throw UnsupportedError("Unsupported tab type");
   }
@@ -471,14 +471,14 @@ class _StoreHome extends State<StoreHome>
                             FontAwesomeIcons.home,
                           ),
                           text: "All"),
-                      Tab(
-                          icon: Icon(FontAwesomeIcons.handHoldingMedical),
-                          text: "Categories"),
-                      Tab(
-                        icon: Icon(FontAwesomeIcons.clipboardList),
-                        text: "Type",
-                      ),
-                      Tab(icon: Icon(FontAwesomeIcons.home), text: "Usage"),
+                      // Tab(
+                      //     icon: Icon(FontAwesomeIcons.handHoldingMedical),
+                      //     text: "Categories"),
+                      // Tab(
+                      //   icon: Icon(FontAwesomeIcons.clipboardList),
+                      //   text: "Type",
+                      // ),
+                      // Tab(icon: Icon(FontAwesomeIcons.home), text: "Usage"),
                     ],
                   )),
                   pinned: true,

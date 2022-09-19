@@ -20,7 +20,7 @@ class Products {
   final List<dynamic> prices;
   final DateTime createdAt;
 
-  const Products({
+   Products({
     @required this.productName,
     @required this.category,
     @required this.description,
@@ -66,6 +66,67 @@ class Products {
       };
 }
 
+
+
+class ReadProducts {
+  final String productName;
+  final String category;
+  final String description;
+  final String productImage;
+  final String usage;
+  final int minimumQuantity;
+  final String type;
+  final int id;
+  final String rating;
+  final List<dynamic> sizes;
+  final List<dynamic> prices;
+  final DateTime createdAt;
+
+   ReadProducts({
+    @required this.productName,
+    @required this.category,
+    @required this.description,
+    @required this.productImage,
+    @required this.usage,
+    @required this.minimumQuantity,
+    @required this.type,
+    @required this.id,
+    @required this.rating,
+    @required this.sizes,
+    @required this.prices,
+    @required this.createdAt,
+  });
+
+  ReadProducts fromJson(Map<String, dynamic> json) => ReadProducts(
+        productName: json['productName'],
+        description: json['description'],
+        category: json['category'],
+        productImage: json['productImage'],
+        usage: json['usage'],
+        minimumQuantity: json['minimum_quantity'],
+        type: json['type'],
+        id: json['id'],
+        rating: json['rating'],
+        sizes: json['sizes'],
+        prices: json['prices'],
+        createdAt: Utils.toDateTime(json['createdAt']),
+      );
+
+  Map<String, dynamic> toJson() => {
+        'productName': productName,
+        'category': category,
+        'description': description,
+        'productImage': productImage,
+        'usage': usage,
+        'minimumQuantity': minimumQuantity,
+        'id': id,
+        'rating': rating,
+        'type': type,
+        'sizes': sizes,
+        'prices': prices,
+        'createdAt': Utils.fromDateTimeToJson(createdAt),
+      };
+}
 class ProductsInHeading implements Comparable<ProductsInHeading> {
   final String heading;
   final List products;

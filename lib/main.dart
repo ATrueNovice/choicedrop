@@ -7,7 +7,6 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:provider/provider.dart';
-
 import 'LogIn/helpers/landingPage.dart';
 
 Future main() async {
@@ -15,7 +14,6 @@ Future main() async {
 
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
-//dfasfasdfassdfasfe
   runApp(const MyApp());
 }
 
@@ -119,6 +117,8 @@ class MyHomePage extends StatefulWidget {
   State<MyHomePage> createState() => _MyHomePageState();
 }
 
+
+
 class _MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
@@ -129,7 +129,7 @@ class _MyHomePageState extends State<MyHomePage> {
               if (snapshot.connectionState == ConnectionState.waiting) {
                 return const Center(child: CircularProgressIndicator());
               } else if (snapshot.hasData) {
-                return BottomBarController();
+                return const BottomBarController();
               } else {
                 return SplashPageScreen();
               }

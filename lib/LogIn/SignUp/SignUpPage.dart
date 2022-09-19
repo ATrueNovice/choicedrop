@@ -6,6 +6,7 @@ import 'package:choicedrop/Static/ensure_visible.dart';
 import 'package:choicedrop/Static/static.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_mapbox_autocomplete/flutter_mapbox_autocomplete.dart';
 
 class SignUpPage extends StatefulWidget {
@@ -595,7 +596,7 @@ class _SignUpPage extends State<SignUpPage> {
       focusNode: focusNode,
       child: TextFormField(
         maxLength: maxLength,
-        maxLengthEnforced: true,
+        maxLengthEnforcement: MaxLengthEnforcement.enforced,
         controller: controller,
         keyboardType: keyboardType,
         textCapitalization: TextCapitalization.none,
@@ -718,7 +719,7 @@ class _SignUpPage extends State<SignUpPage> {
           controller: _pwdController,
           keyboardType: TextInputType.text,
           maxLength: 25,
-          maxLengthEnforced: true,
+          maxLengthEnforcement: MaxLengthEnforcement.enforced,
           obscureText: true,
           textCapitalization: TextCapitalization.words,
           decoration: InputDecoration(
@@ -752,7 +753,7 @@ class _SignUpPage extends State<SignUpPage> {
         focusNode: focusNode,
         child: TextFormField(
           maxLength: maxLength,
-          maxLengthEnforced: true,
+          maxLengthEnforcement: MaxLengthEnforcement.enforced,
           controller: controller,
           keyboardType: keyboardType,
           obscureText: true,
