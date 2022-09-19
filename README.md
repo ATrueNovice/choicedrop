@@ -8,4 +8,4 @@ Test Credentials:
 
 Username: test@choicedrop.com
 
-\nPassword: choicedrop
+Password: choicedrop
