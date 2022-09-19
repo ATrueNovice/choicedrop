@@ -7,4 +7,5 @@ A new Flutter project.
 Test Credentials:
 
 Username: test@choicedrop.com
-Password: choicedrop
+
+\nPassword: choicedrop
