@@ -1,6 +1,6 @@
 # choicedrop
 
-A new Flutter project.
+A water delivery app
 
 ## Getting Started
 
